@@ -1,11 +1,7 @@
-##
-BUILD_ROOT=""
+BUILD_ROOT="/telos/leap/fsl"
 CLIENT_BIN="cleos"
 NODEOS_BIN="nodeos"
-
 #DATA_DIR=""
-
-LOCALIZE_LOG=false
-
+LOCALIZE_LOG=true
 PIN_CPU=false
 CPU="0"
