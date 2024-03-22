@@ -1,6 +1,7 @@
-BUILD_ROOT="/path/to/leap/binaries/3.1.0"
-CLIENT_BIN="$BUILD_ROOT/cleos"
-NODEOS_BIN="$BUILD_ROOT/nodeos"
+##
+BUILD_ROOT=""
+CLIENT_BIN="cleos"
+NODEOS_BIN="nodeos"
 
 #DATA_DIR=""
 
