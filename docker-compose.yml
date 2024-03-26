@@ -1,0 +1,107 @@
+services:
+  redis:
+    build:
+      context: ./telos-evm-docker/testnet/docker/redis/build
+      dockerfile: Dockerfile
+    volumes:
+      - ./telos-evm-docker/testnet/docker/redis/config/redis.conf:/root/redis.conf
+    ports:
+      - "6379:6379"
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.2
+
+  elasticsearch:
+    build:
+      context: ./telos-evm-docker/testnet/docker/elasticsearch/build
+      dockerfile: Dockerfile
+    user: root
+    ports:
+      - "9200:9200"
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.3
+
+  filebeat:
+    platform: linux/amd64
+    build:
+      context: ./telos-evm-docker/testnet/docker/beats/build
+      dockerfile: Dockerfile
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.4
+
+  kibana:
+    build:
+      context: ./telos-evm-docker/testnet/docker/kibana/build
+      dockerfile: Dockerfile
+    ports:
+      - "5601:5601"
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.5
+
+  logrotator:
+    build:
+      context: ./telos-evm-docker/testnet/docker/logrotator/build
+      dockerfile: Dockerfile
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.6
+
+  telos-evm:
+    build:
+      context: ./telos-evm-docker/testnet/docker/telos-evm-rpc/build
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "7800:7800"
+      - "7900:7900"
+    depends_on:
+      - redis
+      - elasticsearch
+      - kibana
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.7
+
+  telosevm-translator:
+    build:
+      context: ./telos-evm-docker/testnet/docker/telosevm-translator/build
+      dockerfile: Dockerfile
+    ports:
+      - "7300:7300"
+    depends_on:
+      - redis
+      - elasticsearch
+    environment:
+      - ELASTIC_NODE=http://elasticsearch:9200
+      - LOG_LEVEL=debug
+      - TELOS_ENDPOINT=http://192.168.50.10:9888
+      - TELOS_REMOTE_ENDPOINT=http://192.168.50.10:9888
+      - INDEXER_START_BLOCK=1
+      - TELOS_WS_ENDPOINT=ws://192.168.50.10:29999
+    restart: always
+    networks:
+      telos-networks:
+        ipv4_address: 10.10.0.8
+
+  #  leap:
+  #    platform: linux/amd64
+  #    build:
+  #      context: ./telos-evm-docker/testnet/docker/leap/build
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - "8888:8888"
+  #      - "29999:29999"
+  #    networks:
+  #      telos-networks:
+  #        ipv4_address: 10.10.0.9
+
+
+networks:
+  telos-networks:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16
