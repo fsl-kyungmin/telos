@@ -1,0 +1,31 @@
+{
+  "chainId": 41,
+  "pm2Name": "telos-testnet-rpc",
+  "pm2Instances": 4,
+  "debug": true,
+  "apiHost": "0.0.0.0",
+  "apiPort": 3000,
+  "nodeosRead": "http://192.168.50.10:9888",
+  "nodeosWrite": "http://192.168.50.10:9888",
+  "signerAccount": "rpc.evm",
+  "signerPermission": "rpc",
+  "signerKey": "5Jr65kdYmn33C3UabzhmWDm2PuqbRfPuDStts3ZFNSBLM7TqaiL",
+  "contracts": {
+    "main": "eosio.evm"
+  },
+  "indexerWebsocketHost": "0.0.0.0",
+  "indexerWebsocketPort": "7800",
+  "indexerWebsocketUri": "ws://127.0.0.1:7800/evm",
+  "rpcWebsocketHost": "0.0.0.0",
+  "rpcWebsocketPort": "7900",
+  "redisHost": "10.10.0.2",
+  "redisPort": 6379,
+  "redisUser": "",
+  "redisPass": "",
+  "elasticNode": "http://elasticsearch:9200",
+  "elasticUser": "elastic",
+  "elasticPass": "secretstuff",
+  "elasticIndexPrefix": "telos-testnet",
+  "elasticIndexVersion": "v1.5",
+  "antelopeChainId": "1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f"
+}
