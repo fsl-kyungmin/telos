@@ -3,22 +3,14 @@
 2. Docker 빌드 && 접속
 3. 아래명령어 실행
 ```
-mkdir -p /telos/leap/fsl
-cp -a /usr/bin/nodeos /telos/leap/fsl/
-```
-
-4. Wallet 키 생성
-```
-cleos create key --to-console
-cleos wallet create -n fsl --to-console
 cleos wallet import -n fsl
+
+Private key: 5JeDBVx1UBym2m268wwu3xr6h5z6sLiSMRbUKKGpSUV9HxvMvKA
+Public key: EOS4xwQhNFprQeKjpkeSSxQPXF5KZT7Lvm8vGfPL4AuTLpMMXSADy
+password : PW5KbfwwajpZeuVng17EYBidQCvafCn7TaaKMz6jmpiFY1Ngw7BLC
 ```
 
-5. config.ini 43번째 줄 수정
-```
-##4번과정에서 생긴 Key로 수정
-signature-provider = EOS5zTR......=KEY:5.......
-```
+
 
 6. Wallet 생성
 ```

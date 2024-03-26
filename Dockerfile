@@ -1,40 +1,22 @@
-# 베이스 이미지 설정
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
-# 패키지 업데이트 및 wget, git 설치
 RUN apt update && \
-    apt install -y wget git cmake python3-pip curl && \
-    pip3 install --user conan==1.60.0 chardet
+    apt-get -y install wget git cmake curl vim
 
-# python path 설정
-ENV PATH="/root/.local/bin:${PATH}"
+RUN apt-get -y install schedtool
 
-# Leap 다운로드 및 설치
-RUN wget https://github.com/AntelopeIO/leap/releases/download/v5.0.2/leap_5.0.2_amd64.deb && \
-    apt install -y ./leap_5.0.2_amd64.deb
+RUN mkdir -p /telos/nodes/fsl
+WORKDIR /telos/nodes/fsl
+RUN curl -L https://api.github.com/repos/telosnetwork/node-template/tarball/master | tar -xvz --strip=1
 
-# cdt 다운로드 및 설치
-RUN wget https://github.com/AntelopeIO/cdt/releases/download/v4.0.1/cdt_4.0.1_amd64.deb && \
-    apt install -y ./cdt_4.0.1_amd64.deb
+RUN wget https://github.com/AntelopeIO/leap/releases/download/v3.1.2/leap-3.1.2-ubuntu22.04-x86_64.deb
+RUN apt-get -y  install ./leap-3.1.2-ubuntu22.04-x86_64.deb
 
-# eos-systemo-contract install
-RUN git clone https://github.com/eosnetworkfoundation/eos-system-contracts.git
-WORKDIR /eos-system-contracts/build
-RUN  cmake -DCMAKE_BUILD_TYPE=Release .. && make -j $(nproc)
+RUN mkdir -p /telos/leap/fsl
+RUN cp -a /usr/bin/nodeos /telos/leap/fsl
 
-# eos-evm 설치 및 세팅
-WORKDIR /
-RUN git clone https://github.com/eosnetworkfoundation/eos-evm.git
-WORKDIR /eos-evm
-RUN git submodule update --init --recursive
+COPY genesis.json genesis.json
+COPY config.ini config.ini
 
-# compile contracts
-WORKDIR /eos-evm/build
-RUN  cmake .. && make -j
-
-# Copy the executables into the container
-# COPY ./data-dir /data-dir
-
-WORKDIR /
 
 ENTRYPOINT [ "sleep", "infinity" ]
