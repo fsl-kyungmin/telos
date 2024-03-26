@@ -77,10 +77,12 @@ services:
     environment:
       - ELASTIC_NODE=http://elasticsearch:9200
       - LOG_LEVEL=debug
+      - READER_LOG_LEVEL=debug
       - TELOS_ENDPOINT=http://192.168.50.10:9888
       - TELOS_REMOTE_ENDPOINT=http://192.168.50.10:9888
       - INDEXER_START_BLOCK=1
       - TELOS_WS_ENDPOINT=ws://192.168.50.10:29999
+      - CHAIN_ID=41
     restart: always
     networks:
       telos-networks:
