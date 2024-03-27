@@ -15,8 +15,7 @@ RUN apt-get -y install ./leap-3.1.2-ubuntu22.04-x86_64.deb
 RUN mkdir -p /telos/leap/fsl
 RUN cp -a /usr/bin/nodeos /telos/leap/fsl
 
-
-COPY genesis.json genesis.json
+COPY node_config node_config
 COPY config.ini config.ini
 COPY start.sh start.sh
 COPY account.sh account.sh
