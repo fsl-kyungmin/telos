@@ -20,5 +20,7 @@ COPY config.ini config.ini
 COPY start.sh start.sh
 COPY account.sh account.sh
 COPY account_2.sh account_2.sh
+COPY eosio.evm.abi eosio.evm.abi
+COPY eosio.evm.wasm eosio.evm.wasm
 
 ENTRYPOINT [ "sleep", "infinity" ]

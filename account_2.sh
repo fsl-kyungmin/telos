@@ -2,8 +2,12 @@
 
 OwnerKey="$1"
 ActiveKey="$1"
+password="$2"
+
+cleos wallet unlock --name fsl
 
 cleos create account eosio eosio.token $OwnerKey $ActiveKey
+cleos create account eosio eosio.evm $OwnerKey $ActiveKey
 cleos create account eosio eosio.bpay $OwnerKey $ActiveKey
 cleos create account eosio eosio.vpay $OwnerKey $ActiveKey
 cleos create account eosio eosio.msig $OwnerKey $ActiveKey
@@ -23,3 +27,6 @@ curl -X POST http://127.0.0.1:8888/v1/producer/schedule_protocol_feature_activat
 cd ../eosio.system
 cleos set contract eosio . ./eosio.system.wasm ./eosio.system.abi
 cleos push action eosio init '[0,"4,TLOS"]' -p eosio@active
+
+cd ../eosio.evm
+cleos set contract eosio.evm . ./eosio.evm.wasm ./eosio.evm.abi
