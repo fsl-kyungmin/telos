@@ -1,0 +1,80 @@
+{
+  "name": "@telosnetwork/telosevm-js",
+  "version": "0.3.1",
+  "description": "Telos EVM JS SDK",
+  "keywords": [],
+  "main": "lib/cjs/telosevm-js.js",
+  "module": "lib/esm/telosevm-js.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "lib/",
+    "wrapper.mjs"
+  ],
+  "author": "jafri <syed.jafri2@ucalgary.ca>",
+  "contributors": [
+    "eugene <eugene@eostribe.io> (https://cryptotribe.io)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telosnetwork/telosevm-js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rm -rf dist",
+    "prepublish": "yarn prebuild && yarn build",
+    "build": "npm run build:all",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --p tsconfig.node.json",
+    "build:webpack": "webpack",
+    "build:all": "npm run build:cjs && npm run build:esm && npm run build:webpack",
+    "start": "rollup -c rollup.config.ts -w",
+    "test-off": "jest --coverage --runInBand --testPathIgnorePatterns debugging",
+    "debug": "jest --coverage --runInBand debugging",
+    "test:watch": "jest --coverage --runInBand --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "compile": "ts-node src/eth-contracts/compile.ts",
+    "docs": "documentation readme dist/lib/telosevm-js.js -s API",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "devDependencies": {
+    "@types/elliptic": "^6.4.12",
+    "@types/ethereumjs-abi": "^0.6.3",
+    "@types/jest": "^23.3.14",
+    "@types/node": "^14.14.37",
+    "@types/node-fetch": "^2.5.4",
+    "@types/text-encoding": "0.0.35",
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^8.1.0",
+    "typescript": "^4.2.3",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "eosio-evm-js": "0.3.2"
+  },
+  "dependencies": {
+    "@ethereumjs/common": "^2.3.1",
+    "@ethereumjs/tx": "^3.2.1",
+    "assert": "^2.0.0",
+    "axios": "^1.6.1",
+    "bn.js": "^5.1.1",
+    "buffer": "^6.0.3",
+    "eosjs": "^22.1.0",
+    "ethereumjs-abi": "^0.6.8",
+    "ethereumjs-util": "^6.2.0",
+    "node-fetch": "^2.6.0",
+    "stream": "^0.0.2",
+    "text-encoding": "^0.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/telosnetwork/telosevm-js/issues"
+  },
+  "homepage": "https://github.com/telosnetwork/telosevm-js#readme"
+}
