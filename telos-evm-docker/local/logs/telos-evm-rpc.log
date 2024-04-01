@@ -1,0 +1,82 @@
+Creating logger for telos-evm-rpc  with level info
+Starting Telos EVM RPC...
+Redis client is connect
+Redis client is ready
+Warning: idleTimeout should be a multiple of 4!
+Listening to port 7401
+Telos EVM RPC started!!!
+[05:14:39.646] [32mINFO[39m (telos-evm-rpc/7): [36mAll services reached[39m
+[05:14:39.746] [32mINFO[39m (telos-evm-rpc/7): [36mServer listening at http://192.168.123.8:7001[39m
+[05:14:39.746] [32mINFO[39m (telos-evm-rpc/7): [36mStarting teloscan-evm-rpc at 192.168.123.8:7001[39m
+[05:15:25.978] [32mINFO[39m (telos-evm-rpc/7): [36mincoming request[39m
+    reqId: "req-1"
+    req: {
+      "method": "GET",
+      "url": "/",
+      "hostname": "192.168.123.8:7001",
+      "remoteAddress": "192.168.123.0",
+      "remotePort": 52902
+    }
+[05:15:25.980] [32mINFO[39m (telos-evm-rpc/7): [36mRoute GET:/ not found[39m
+    reqId: "req-1"
+[05:15:25.986] [32mINFO[39m (telos-evm-rpc/7): [36mrequest completed[39m
+    reqId: "req-1"
+    res: {
+      "statusCode": 404
+    }
+    responseTime: 6.898216992616653
+[05:15:26.089] [32mINFO[39m (telos-evm-rpc/7): [36mincoming request[39m
+    reqId: "req-2"
+    req: {
+      "method": "GET",
+      "url": "/favicon.ico",
+      "hostname": "192.168.123.8:7001",
+      "remoteAddress": "192.168.123.0",
+      "remotePort": 52902
+    }
+[05:15:26.089] [32mINFO[39m (telos-evm-rpc/7): [36mRoute GET:/favicon.ico not found[39m
+    reqId: "req-2"
+[05:15:26.090] [32mINFO[39m (telos-evm-rpc/7): [36mrequest completed[39m
+    reqId: "req-2"
+    res: {
+      "statusCode": 404
+    }
+    responseTime: 0.42759400606155396
+[05:46:49.832] [32mINFO[39m (telos-evm-rpc/7): [36mincoming request[39m
+    reqId: "req-3"
+    req: {
+      "method": "GET",
+      "url": "/evm",
+      "hostname": "192.168.123.8:7001",
+      "remoteAddress": "192.168.123.0",
+      "remotePort": 54240
+    }
+[05:46:49.861] [31mERROR[39m (telos-evm-rpc/7): [36mCannot read properties of undefined (reading 'index')[39m
+    reqId: "req-3"
+    req: {
+      "method": "GET",
+      "url": "/evm",
+      "hostname": "192.168.123.8:7001",
+      "remoteAddress": "192.168.123.0",
+      "remotePort": 54240
+    }
+    res: {
+      "statusCode": 500
+    }
+    err: {
+      "type": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'index')",
+      "stack":
+          TypeError: Cannot read properties of undefined (reading 'index')
+              at getCurrentBlockNumber (/telos-evm-rpc/dist/routes/evm/index.js:512:37)
+              at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+              at async toBlockNumber (/telos-evm-rpc/dist/routes/evm/index.js:641:20)
+              at async /telos-evm-rpc/dist/routes/evm/index.js:1164:38
+              at async Object.<anonymous> (/telos-evm-rpc/dist/routes/evm/index.js:1728:23)
+    }
+[05:46:49.864] [32mINFO[39m (telos-evm-rpc/7): [36mrequest completed[39m
+    reqId: "req-3"
+    res: {
+      "statusCode": 500
+    }
+    responseTime: 31.668553978204727
